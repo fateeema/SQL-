@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="C:/Users/fatma/Downloads/Car_Database (1).db" readonly="0" foreign_keys="1" case_sensitive_like="0" temp_store="0" wal_autocheckpoint="1000" synchronous="2"/><attached/><window><main_tabs open="structure browser pragmas query" current="3"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="125"/><column_width id="3" width="4743"/><column_width id="4" width="0"/><expanded_item id="0" parent="1"/><expanded_item id="1" parent="1"/><expanded_item id="2" parent="1"/><expanded_item id="3" parent="1"/></tab_structure><tab_browse><current_table name="4,6:mainBrands"/><default_encoding codec=""/><browse_table_settings/></tab_browse><tab_sql><sql name="all.sql">/* meeting &gt;
+	1 - Income of each Customer
+	SELECT customer_id,household_income FROM Customers
+	
+	2- max income of Customers 
+	select customer_id,first_name,max(household_income) FROM Customers
+
+	3- Count Males &amp; females of my Customers
+	SELECT 
+		sum( CASE when gender = 'Male' then 1 else 0 end)as Male,
+		sum( CASE when gender = 'Female' then 1 else 0 end)as Females
+	from Customers
+	
+	4- age of Customers 
+	SELECT customer_id,first_name, '2023-02-7'-birthdate from Customers
+	
+	5- which Dealer that Customer buy from him(ex : customer 1 deal with dealer id 5)
+	SELECT co.customer_id,d.dealer_id,dealer_name,dealer_address from Customer_Ownership co
+	left join Dealers d
+	on co.dealer_id = d.dealer_id
+	
+	6- price of Customer's car and there is relationship between The income &amp; Price of the car ? 
+	SELECT co.customer_id,c.first_name,c.last_name,c.household_income,co.purchase_price from Customers c
+	inner JOIN Customer_Ownership co
+	on c.customer_id = co.customer_id
+	
+	7- which brand that dealer work in ?
+	SELECT db.dealer_id,db.brand_id,b.brand_name from Dealer_Brand db
+	inner join Brands b
+	on db.brand_id = b.brand_id
+	
+	8-Count brands that dealer work in
+	SELECT dealer_id,count(*)as &quot;count of brands&quot; from Dealer_Brand
+	group by dealer_id
+
+	9 - price of each model ?
+	SELECT model_name,model_base_price from Models
+	
+	10-how many Models for each brand
+	SELECT brand_id,count(*) as &quot;cnt_models&quot; from Models
+	group by brand_id
+	
+	11- count days for Manufacture each part
+	SELECT part_name,(manufacture_end_date-manufacture_start_date) as cnt_days from Car_Parts
+	
+	12 - where each part Manufactured in ?  
+	 SELECT cp.part_name,mp.plant_location from Manufacture_Plant mp
+	 inner join Car_Parts cp 
+	 on mp.manufacture_plant_id = cp.manufacture_plant_id
+	 
+	13- how many parts that each plant make ?
+		SELECT mp.plant_location,count(*)as cnt_parts from Manufacture_Plant mp 
+	LEFT join (
+		SELECT manufacture_plant_id,part_name from Car_Parts
+	)as t1
+	where mp.manufacture_plant_id = t1.manufacture_plant_id
+	group by mp.plant_location
+	
+*/
+SELECT 
+		sum( CASE when gender = 'Male' then 1 else 0 end)as Male,
+		sum( CASE when gender = 'Female' then 1 else 0 end)as Females
+	from Customers
+</sql><current_tab id="0"/></tab_sql></sqlb_project>
